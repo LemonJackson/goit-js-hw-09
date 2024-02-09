@@ -12,10 +12,20 @@ function readFormData(form) {
     }
 }
 
+const userData = {};
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
-    // localStorage.clear()
+
+    const { elements: { email, message }, } = event.currentTarget;
+
+    if (email.value === '' || message.value === '') {
+        alert('All form fields must be filled in');
+    } else {
+        userData['email'] = email.value;
+        userData['message'] = message.value;
+        console.log(userData);
+    }
     localStorage.removeItem(STORAGE_KEY)
     form.reset()
 })

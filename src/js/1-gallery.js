@@ -72,36 +72,20 @@ const images = [
 
 const gallery = document.querySelector('.gallery');
 
-function createItem({ preview, original, description }) {
-    const galleryItem = `
+function createGalleryItem(images) {
+    return images.map(({ preview, original, description }) => `
         <li class="gallery-item">
             <a class="gallery-link" href="${original}">
                 <img class="gallery-image" src="${preview}" alt="${description}" />
             </a>
-        </li>`
-
-
-    return galleryItem;
+        </li>` ).join('');
 };
 
-let markup = "";
 
 
-for (let item of images) {
-    markup += createItem(item);
-}
+gallery.innerHTML = createGalleryItem(images);
 
-gallery.innerHTML = markup;
-
-gallery.addEventListener('click', (event) => {
-    event.preventDefault()
-    let lightbox = new SimpleLightbox('.gallery-link', {
-        captionsData: 'alt',
-        captionDelay: 250,
-    });
-    lightbox.open()
+let lightbox = new SimpleLightbox('.gallery-link', {
+    captionsData: 'alt',
+    captionDelay: 250,
 });
-
-
-
-console.log(images);
